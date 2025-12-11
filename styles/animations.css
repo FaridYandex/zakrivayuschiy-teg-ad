@@ -9,3 +9,119 @@
 ✦ button__text — для обозначения текстового элемента внутри кнопки
 
 */
+
+/* Анимация увеличения сердечка при лайке */
+@keyframes heart-scale {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.25);
+  }
+}
+
+/* Анимация частиц-искр вокруг сердечка */
+@keyframes sparks-animation {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Базовые стили для иконки сердечка */
+.like-icon {
+  width: 39px;
+  height: 36px;
+  cursor: pointer;
+}
+
+/* Частицы по умолчанию скрыты */
+.like-icon .sparks {
+  opacity: 0;
+}
+
+/* Базовые переходы для всех частей сердечка*/
+.like-icon .core {
+  fill: rgba(0, 0, 0, 0);
+  /* При убирании курсора сердцевина исчезает с задержкой 0.03s, чтобы дождаться пока потухнет основное тело */
+  transition: fill 0.3s ease 0.03s;
+}
+
+.like-icon .main-body {
+  fill: rgba(0, 0, 0, 0);
+  /* Основное тело исчезает сразу, без задержки */
+  transition: fill 0.3s ease 0s;
+}
+
+.like-icon .contour {
+  /* Контур меняется быстро, без плавности */
+  transition: fill 0.1s linear;
+}
+
+/* Состояние при наведении курсора - закрашиваем черным цветом */
+.like-icon:hover .core {
+  fill: var(--contour-color);
+  /* Сердцевина закрашивается сразу, без задержки */
+  transition: fill 0.3s ease 0s;
+}
+
+.like-icon:hover .main-body {
+  fill: var(--contour-color);
+  /* Основное тело закрашивается с небольшой задержкой, чтобы было видно как сначала появляется сердцевина */
+  transition: fill 0.3s ease 0.05s;
+}
+
+/* Состояние при нажатии - закрашиваем красным */
+.like-icon:active .core {
+  fill: var(--animation-fill-color);
+  transition: fill 0.3s ease 0s;
+}
+
+.like-icon:active .main-body {
+  fill: var(--animation-fill-color);
+  transition: fill 0.3s ease 0.05s;
+}
+
+/* Состояние когда сердечко лайкнуто (добавлен класс is-liked) */
+.like-icon.is-liked .core {
+  fill: var(--animation-fill-color);
+  transition: fill 0.3s ease;
+}
+
+.like-icon.is-liked .main-body {
+  fill: var(--animation-fill-color);
+  transition: fill 0.3s ease 0.05s;
+}
+
+.like-icon.is-liked .contour {
+  fill: var(--animation-fill-color);
+  /* Контур закрашивается последним, с самой большой задержкой */
+  transition: fill 0.3s ease 0.06s;
+}
+
+/* Когда сердечко лайкнуто, оно увеличивается */
+.like-icon.is-liked .heart {
+  animation: heart-scale 0.3s ease-in 0.1s 1;
+  transform-origin: center;
+}
+
+/* Частицы появляются в конце анимации лайка */
+.like-icon.is-liked .sparks {
+  animation: sparks-animation 0.3s ease-in 0.3s 1 forwards;
+}
+
+/* Когда убираем лайк, частицы сразу скрываются */
+.like-icon:not(.is-liked) .sparks {
+  animation: none;
+  opacity: 0;
+}
+
+/* При убирании лайка контур быстро возвращается к исходному состоянию */
+.like-icon:not(.is-liked) .contour {
+  transition: fill 0.1s linear;
+}

@@ -1,1 +1,38 @@
 /* В этом файле будут храниться все значения переменных в исходном состоянии, а так же их изменения в зависимости от ширины устройства */
+
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --border-color: #000000;
+  --accent-color: #000000;
+  --button-text-color: #ffffff;
+  --accent-font: 'Press Start 2P', monospace;
+  --main-font: 'Inter Variable', sans-serif;
+  --font-size-base: 18px;
+  --font-size-small: 14px;
+  --line-height-base: 21px;
+  --line-height-small: 12.6px;
+  --border-width: 2px;
+  --content-max-width: 700px;
+  --width-to-block: clamp(375px, 260.56px + 30.52vw, 700px);
+  --spacing-small: 25px;
+  --spacing-medium: 50px;
+  --main-border: var(--border-width) solid var(--border-color);
+  --contour-color: #000000;
+  --animation-fill-color: #ff0000;
+  --bg-image: repeating-linear-gradient(
+      to right,
+      #d3d3d3 0 2px,
+      transparent 2px 4px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      #d3d3d3 0 2px,
+      transparent 2px 4px
+    ),
+    linear-gradient(
+      to bottom,
+      #e7e7e7 0.01%,
+      #1a1a1a 100%
+    );
+}
